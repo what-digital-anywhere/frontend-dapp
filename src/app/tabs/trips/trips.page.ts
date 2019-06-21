@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Web3Service} from '../../services/web3.service';
 
 @Component({
   selector: 'app-trips',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripsPage implements OnInit {
 
-  constructor() { }
+  constructor(private web3: Web3Service) { }
 
   ngOnInit() {
   }

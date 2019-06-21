@@ -6,7 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TripsPage } from './trips.page';
-import {TripComponent} from './trip/trip.component';
+import {CurrentTripComponent} from './current-trip/current-trip.component';
+import {PastTripComponent} from './past-trip/past-trip.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-    declarations: [TripsPage, TripComponent]
+  declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
 })
 export class TripsPageModule {}

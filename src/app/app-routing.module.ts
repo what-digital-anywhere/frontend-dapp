@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'connect', loadChildren: './connect/connect.module#ConnectPageModule' },
   { path: 'qr-scanner', loadChildren: './qr-scanner/qr-scanner.module#QrScannerPageModule' },
-  { path: 'trips', loadChildren: './trips/trips.module#TripsPageModule' }
+  { path: 'start-trip', loadChildren: './tabs/start-trip/start-trip.module#StartTripPageModule' },
 ];
 @NgModule({
   imports: [
