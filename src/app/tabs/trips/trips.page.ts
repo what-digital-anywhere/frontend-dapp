@@ -9,17 +9,17 @@ import {PRIVATE_KEY} from '../../app.constants';
 })
 export class TripsPage implements OnInit {
 
-    constructor(private web3: Web3Service) {
+    constructor(private web3Service: Web3Service) {
     }
 
     ngOnInit() {
         const privateKey = localStorage.getItem(PRIVATE_KEY);
 
-        this.web3.eth.personal.newAccount(privateKey, () => {
-            this.web3.eth.getAccounts().then((accounts) => {
+        this.web3Service.web3.eth.personal.newAccount(privateKey, () => {
+            this.web3Service.web3.eth.getAccounts().then((accounts) => {
                 const account = accounts[0];
-                this.web3.eth.defaultAccount = account;
-                const allTrips = this.web3.contract.methods.getTrips(
+                this.web3Service.web3.eth.defaultAccount = account;
+                const allTrips = this.web3Service.web3.contract.methods.getTrips(
                     account,
                 ).call({
                     from: account,
