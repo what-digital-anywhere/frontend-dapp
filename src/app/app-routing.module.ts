@@ -3,8 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'connect', canActivate: [AuthGuard], loadChildren: './connect/connect.module#ConnectPageModule' },
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: 'connect', loadChildren: './connect/connect.module#ConnectPageModule' },
+  { path: '', canActivate: [AuthGuard], loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'qr-scanner', loadChildren: './qr-scanner/qr-scanner.module#QrScannerPageModule' },
   { path: 'start-trip', loadChildren: './tabs/start-trip/start-trip.module#StartTripPageModule' },
 ];
