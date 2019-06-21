@@ -11,6 +11,6 @@ export class Web3Service {
   public privateKey = '';
   constructor() {
     this.web3 = new Web3('ws://159.100.249.117:8545');
-    this.contract = new Web3.eth.Contract(ABI);
+    this.contract = new this.web3.eth.Contract(ABI);
   }
 }
