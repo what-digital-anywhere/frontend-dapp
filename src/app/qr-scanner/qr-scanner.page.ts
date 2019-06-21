@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Web3Service} from '../services/web3.service';
 
 @Component({
   selector: 'app-qr-scanner',
@@ -7,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrScannerPage implements OnInit {
 
-  constructor() { }
+  constructor(private web3Service: Web3Service) { }
 
   ngOnInit() {
   }
 
   onSuccessfulScanned(result) {
-    console.log(result);
+    localStorage.setItem(PRIVATE_KEY, result);
+    this.web3Service.privateKey = result;
   }
 
   onFailedScan(result: any) {
