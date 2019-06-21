@@ -1,1 +1,1 @@
-const PRIVATE_KEY = 'PRIVATE_KEY';
+export const PRIVATE_KEY = 'PRIVATE_KEY';
