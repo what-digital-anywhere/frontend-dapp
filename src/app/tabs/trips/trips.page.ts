@@ -13,13 +13,14 @@ export class TripsPage implements OnInit {
     }
 
     ngOnInit() {
-        const privateKey = localStorage.getItem(PRIVATE_KEY);
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
+        console.log('privateKey:', privateKey);
 
         this.web3Service.web3.eth.personal.newAccount(privateKey, () => {
             this.web3Service.web3.eth.getAccounts().then((accounts) => {
                 const account = accounts[0];
                 this.web3Service.web3.eth.defaultAccount = account;
-                const allTrips = this.web3Service.web3.contract.methods.getTrips(
+                this.web3Service.contract.methods.getTrips(
                     account,
                 ).call({
                     from: account,
