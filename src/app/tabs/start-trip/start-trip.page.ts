@@ -69,6 +69,7 @@ export class StartTripPage implements OnInit {
                 const toast = await this.toastController.create({
                     message: 'Check in attempt failed',
                     position: 'bottom',
+                    duration: 3000,
                 });
                 toast.present();
                 console.log(error);

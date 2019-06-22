@@ -27,14 +27,7 @@ export class CurrentTripComponent {
         const toast = await this.toastController.create({
             message: 'Check out was successful',
             position: 'bottom',
-            buttons: [
-                {
-                    text: 'Done',
-                    role: 'cancel',
-                    handler: () => {
-                    }
-                }
-            ]
+            duration: 1000,
         });
         toast.present();
     }
