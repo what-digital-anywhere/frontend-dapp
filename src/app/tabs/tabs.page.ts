@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TabsControllerService} from '../services/tabs-controller/tabs-controller.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,10 +8,11 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(private tabController: TabsControllerService) {}
 
   handleTabWillChange(tab) {
-
+    console.log(tab);
+    // this.tabController.tabSubject.next()
   }
 
 }
