@@ -46,7 +46,7 @@ export class TripsPage implements OnInit {
         this.pastTrips = pastTrips;
 
         for (const trip of result) {
-            if (trip.isCheckedOut) {
+            if (!trip.isCheckedOut) {
                 const currentTrip = {
                     start: new Date(trip.startTimestamp.toNumber() * 1000),
                     end: new Date(trip.endTimestamp.toNumber() * 1000),
