@@ -10,5 +10,9 @@
     <zxing-scanner
             (scanError)="onErrorInScanning($event)"
             (scanFailure)="onFailedScan($event)"
-            (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
+            (scanSuccess)="onSuccessfulScanned($event)"
+            [enable]="isScannerEnabled"
+            *ngIf="isScannerEnabled"
+    ></zxing-scanner>
+    <h1 *ngIf="tspPubKey">TSP public key: <span>{{tspPubKey}}</span></h1>
 </ion-content>

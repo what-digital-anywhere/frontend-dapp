@@ -4,6 +4,7 @@ import {Web3Service} from 'app/services/web3/web3.service';
 import {ToastController} from '@ionic/angular';
 import Web3 from 'web3';
 
+
 @Component({
     selector: 'app-current-trip',
     templateUrl: './current-trip.component.html',
@@ -35,10 +36,10 @@ export class CurrentTripComponent {
     public generateTicketString(): string {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
         const signatureObj = this.web3.eth.accounts.sign(
-            this.tripService.currentTrip.start.toString(),
+            this.tripService.currentTrip.start.getTime().toString(),
             privateKey
         );
-        return signatureObj.signature + ',' + signatureObj.message;
+        return `${signatureObj.signature},${signatureObj.message}`;
     }
 
     public async checkOut() {
