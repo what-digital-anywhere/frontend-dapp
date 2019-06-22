@@ -1,38 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../services/web3/web3.service';
 import {Router} from '@angular/router';
 import {PRIVATE_KEY} from '../app.constants';
 
 @Component({
-  selector: 'app-qr-scanner',
-  templateUrl: './qr-scanner.page.html',
-  styleUrls: ['./qr-scanner.page.scss'],
+    selector: 'app-qr-scanner',
+    templateUrl: './qr-scanner.page.html',
+    styleUrls: ['./qr-scanner.page.scss'],
 })
-export class QrScannerPage{
+export class QrScannerPage {
+    constructor(private web3Service: Web3Service, private router: Router) {
+    }
 
-  constructor(private web3Service: Web3Service, private router: Router) { }
-  public isScannerEnabled = true;
-  ionViewWillEnter() {
-    this.isScannerEnabled = true;
-  }
+    public isScannerEnabled = true;
 
-  onSuccessfulScanned(result) {
-    localStorage.setItem('PRIVATE_KEY', result);
-    this.web3Service.privateKey = result;
-    this.router.navigate(['/tabs/trips']);
-  }
+    ionViewWillEnter() {
+        this.isScannerEnabled = true;
+    }
 
-  onFailedScan(result: any) {
-    // console.log(result);
-  }
+    onSuccessfulScanned(result) {
+        if (!result.startsWith('0x')) {
+            result = '0x' + result;
+        }
 
-  onErrorInScanning(result: Error) {
-    // console.log(result);
+        localStorage.setItem('PRIVATE_KEY', result);
 
-  }
+        this.web3Service.privateKey = result;
+        this.router.navigate(['/tabs/trips']);
+    }
 
-  ionViewWillLeave() {
-    console.log('will leave');
-    this.isScannerEnabled = false;
-  }
+    onFailedScan(result: any) {
+        // console.log(result);
+    }
+
+    onErrorInScanning(result: Error) {
+        // console.log(result);
+
+    }
+
+    ionViewWillLeave() {
+        console.log('will leave');
+        this.isScannerEnabled = false;
+    }
 }
+

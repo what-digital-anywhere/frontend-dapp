@@ -28,7 +28,8 @@ export class Web3Service {
     }
 
     public async createAccount() {
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
+        let privateKey = localStorage.getItem('PRIVATE_KEY');
+
         if (!privateKey) {
             return Promise.resolve(false);
         }
