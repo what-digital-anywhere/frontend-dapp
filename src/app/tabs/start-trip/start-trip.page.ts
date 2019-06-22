@@ -23,9 +23,17 @@ export class StartTripPage implements OnInit {
         private tripService: TripService,
     ) {
     }
-    ionViewWillLeave() {
-        console.log("??? leave ???")
+
+    ionViewWillEnter() {
+        this.isScannerEnabled = true;
     }
+
+    ionViewWillLeave() {
+        console.log('will leave');
+        this.isScannerEnabled = false;
+    }
+
+
     ngOnInit() {
         this.tabsController.tabSubject.subscribe(async name => {
             console.log(name);

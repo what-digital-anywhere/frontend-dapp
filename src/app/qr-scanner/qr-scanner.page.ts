@@ -38,9 +38,8 @@ export class QrScannerPage {
 
     }
 
-    ionViewWillLeave() {
-        console.log('will leave');
-        this.isScannerEnabled = false;
-    }
+  ionViewWillLeave() {
+    console.log('will leave');
+    this.isScannerEnabled = false;
+  }
 }
-
