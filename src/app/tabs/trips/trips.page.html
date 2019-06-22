@@ -10,7 +10,9 @@
 </ion-header>
 
 <ion-content>
-    <app-current-trip></app-current-trip>
-    <app-past-trip></app-past-trip>
+    <div *ngFor="let trip of trips">
+        <app-current-trip></app-current-trip>
+        <app-past-trip></app-past-trip>
+    </div>
 </ion-content>
 

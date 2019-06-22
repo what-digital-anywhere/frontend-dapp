@@ -5,25 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TripsPage } from './trips.page';
-import {CurrentTripComponent} from './current-trip/current-trip.component';
-import {PastTripComponent} from './past-trip/past-trip.component';
+import { PrivateKeyInputPage } from './private-key-input.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TripsPage
+    component: PrivateKeyInputPage
   }
 ];
 
 @NgModule({
   imports: [
-
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
+  declarations: [PrivateKeyInputPage]
 })
-export class TripsPageModule {}
+export class PrivateKeyInputPageModule {}

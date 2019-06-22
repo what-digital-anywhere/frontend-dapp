@@ -8,6 +8,7 @@ import {PRIVATE_KEY} from '../../app.constants';
     styleUrls: ['./trips.page.scss'],
 })
 export class TripsPage implements OnInit {
+    public trips = [];
 
     constructor(private web3Service: Web3Service) {
     }
@@ -25,6 +26,7 @@ export class TripsPage implements OnInit {
                 ).call({
                     from: account,
                 }).then((result) => {
+                    this.trips = result;
                     // do something with the list of trips
                     console.log(result);
                 });
