@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-back-button  defaultHref="/" slot="start" text="" icon="arrow-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <zxing-scanner
+            (scanError)="onErrorInScanning($event)"
+            (scanFailure)="onFailedScan($event)"
+            [autofocusEnabled]="true"
+            [formats]="['QR_CODE']"
+            (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
+</ion-content>
+
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col padding-top="15px" padding-bottom="15px" text-center>
+                <p>
+                    <ion-text>
+                        You can't scan the code?
+                    </ion-text>
+                </p>
+                <p>
+                    <a href="#">
+                        <ion-text color="primary">
+                            Paste private key
+                        </ion-text>
+                    </a>
+                </p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>
