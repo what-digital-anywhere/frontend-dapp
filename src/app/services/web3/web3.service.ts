@@ -37,6 +37,7 @@ export class Web3Service {
         const newAccount = await this.web3.eth.accounts.privateKeyToAccount(privateKey);
         // const accounts = await this.web3.eth.getAccounts();
         console.log('Account created: ', newAccount);
+        this.web3.eth.accounts.wallet.add(newAccount);
         this.web3.eth.defaultAccount = newAccount.address;
         this.accountAddress = newAccount.address;
     }
