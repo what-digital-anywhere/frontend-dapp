@@ -18,6 +18,17 @@ export class TripsPage {
     ) {
     }
 
+    async doRefresh(event) {
+        const result = await this.web3Service.contract.methods.getTrips(
+            this.web3Service.accountAddress,
+        ).call({
+            from: this.web3Service.accountAddress,
+        });
+        console.log(result)
+        this.createTripsObject(result);
+        event.target.complete()
+    }
+
     async ionViewDidEnter() {
         const result = await this.web3Service.contract.methods.getTrips(
             this.web3Service.accountAddress,
@@ -42,7 +53,7 @@ export class TripsPage {
                 end: new Date(Number(trip.endTimestamp) * 1000),
                 transporter: trip.transporter,
                 passenger: trip.passenger,
-                price:  Web3.utils.fromWei(trip.price, 'ether'),
+                price: Web3.utils.fromWei(trip.price, 'ether'),
                 isCheckedOut: trip.isCheckedOut,
                 isPaid: trip.isPaid,
             };

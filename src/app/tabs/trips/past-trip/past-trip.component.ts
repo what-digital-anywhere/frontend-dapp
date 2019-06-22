@@ -19,6 +19,7 @@ interface IPastTripData {
 })
 export class PastTripComponent implements OnInit {
     @Input() tripData: IPastTripData = {} as any;
+    shown = false;
 
     constructor(private web3Service: Web3Service) {
     }
@@ -39,7 +40,7 @@ export class PastTripComponent implements OnInit {
             value,
             gas: 5000000
         });
-        console.log(txResult);
+        this.shown = true;
     }
 
 }

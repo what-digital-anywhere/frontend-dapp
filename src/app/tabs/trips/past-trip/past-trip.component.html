@@ -21,11 +21,22 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0">
+            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0 && !shown">
                 <ion-col sizeXs="12">
                     <ion-button (click)="startPayment(tripData)" size="block" color="light">
                         <ion-text color="primary">
                             Pay now
+                        </ion-text>
+                    </ion-button>
+                </ion-col
+                >
+            </ion-row>
+
+            <ion-row *ngIf="tripData?.isPaid && tripData?.price > 0 || shown">
+                <ion-col sizeXs="12">
+                    <ion-button [disabled]="true" size="block" color="light">
+                        <ion-text color="success">
+                            Paid
                         </ion-text>
                     </ion-button>
                 </ion-col>

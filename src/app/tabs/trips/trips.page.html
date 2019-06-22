@@ -10,10 +10,18 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
     <div *ngIf="currentTripService.currentTrip">
-        <app-current-trip (updateCheckOutStatus)="onCheckotOut()" [tripData]="currentTripService.currentTrip"></app-current-trip>
+        <app-current-trip (updateCheckOutStatus)="onCheckotOut()"
+                          [tripData]="currentTripService.currentTrip"></app-current-trip>
     </div>
-
     <div *ngFor="let trip of pastTrips">
         <app-past-trip [tripData]="trip"></app-past-trip>
     </div>
