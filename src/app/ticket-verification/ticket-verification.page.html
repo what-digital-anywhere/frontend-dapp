@@ -7,28 +7,11 @@
 </ion-header>
 
 <ion-content>
-  <ngx-kjua
-    [text]="generateTicket()"
-  ></ngx-kjua>
+    <zxing-scanner
+            (scanError)="onErrorInScanning($event)"
+            (scanFailure)="onFailedScan($event)"
+            [autofocusEnabled]="true"
+            [formats]="['QR_CODE']"
+            (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
 </ion-content>
-
-<ion-footer>
-    <ion-grid>
-        <ion-row>
-            <ion-col padding-top="15px" padding-bottom="15px" text-center>
-                <p>
-                    <ion-text>
-                        You can't scan the code?
-                    </ion-text>
-                </p>
-                <p>
-                    <a href="#">
-                        <ion-text color="primary">
-                            Paste private key
-                        </ion-text>
-                    </a>
-                </p>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</ion-footer>
+>
