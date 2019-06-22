@@ -1,0 +1,11 @@
+ion-button {
+  --background: var(--ion-color-success);
+  --background-focused: var(--ion-color-success);
+  --background-activated: var(--ion-color-success);
+}
+.scan-again-btn {
+  position: absolute;
+  bottom: 2vh;
+  left: 2vw;
+  right: 2vw;
+}

@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'start-trip', loadChildren: './tabs/start-trip/start-trip.module#StartTripPageModule' },
   { path: 'private-key-input', loadChildren: './private-key-input/private-key-input.module#PrivateKeyInputPageModule' },
   { path: 'wallet', loadChildren: './tabs/wallet/wallet.module#WalletPageModule' },
+  { path: 'ticket-verified', loadChildren: './ticket-verified/ticket-verified.module#TicketVerifiedPageModule' },
 ];
 @NgModule({
   imports: [

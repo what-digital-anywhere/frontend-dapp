@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/tabs/trips" slot="start">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title text-center>Ticket verified</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="verificationService.verificationData | async as verifiedTicket">
+        <ion-card-content>
+            <ion-item>
+                TSP: {{verifiedTicket.tspPublicKey}}
+            </ion-item>
+            <ion-item>
+                Started at: {{createDate(verifiedTicket.timestamp)}}
+            </ion-item>
+        </ion-card-content>
+        <ion-footer color="success" text-center>
+            <ion-item text-center type="button" expand="full" fill="" color="success">
+                <ion-label>
+                    <ion-icon name="checkmark"></ion-icon>
+                    Ticket Valid
+
+                </ion-label>
+            </ion-item>
+        </ion-footer>
+    </ion-card>
+    <ion-button class="scan-again-btn" color="light" routerLink="/ticket-verification" expand="full">
+        <ion-text color="primary">
+            Scan New Ticket
+        </ion-text>
+    </ion-button>
+</ion-content>

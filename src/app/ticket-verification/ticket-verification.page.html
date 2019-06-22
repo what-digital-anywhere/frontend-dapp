@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-        <ion-back-button  defaultHref="/" slot="start" text="" icon="arrow-back"></ion-back-button>
+        <ion-back-button  defaultHref="/tabs/trips" slot="start" text="" icon="arrow-back"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -14,5 +14,4 @@
             [enable]="isScannerEnabled"
             *ngIf="isScannerEnabled"
     ></zxing-scanner>
-    <h1 *ngIf="tspPubKey">TSP public key: <span>{{tspPubKey}}</span></h1>
 </ion-content>
