@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 
 
 export class CurrentTrip {
-    start: number
-    end: number
-    transporter: string
-    passenger: string
-    price: number
-    isCheckedOut: boolean
-    isPaid: boolean
-    checkInHash: string
+    start: number;
+    end: number;
+    transporter: string;
+    passenger: string;
+    price: number;
+    isCheckedOut: boolean;
+    isPaid: boolean;
+    checkInHash: string;
 }
 
 @Injectable({

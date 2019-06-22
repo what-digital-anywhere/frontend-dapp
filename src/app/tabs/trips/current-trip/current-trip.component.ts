@@ -12,7 +12,7 @@ import {TripService} from 'app/services/trip-verification/trip-verification.serv
 export class CurrentTripComponent implements OnInit {
     @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
-    
+
     private web3: Web3
 
     constructor(
@@ -51,10 +51,12 @@ export class CurrentTripComponent implements OnInit {
     }
 
     public generateTicketString(): string {
-        const privateKey = localStorage.getItem('PRIVATE_KEY')
-        let txHash = this.tripService.currentTrip.checkInHash
-        let signatureObj = this.web3.eth.accounts.sign(txHash, privateKey)
-        return JSON.stringify(signatureObj)
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
+        const txHash = this.tripService.currentTrip.checkInHash;
+        console.log(this.tripService.currentTrip)
+        this.tripService.currentTrip.checkInHash = '';
+        const signatureObj = this.web3.eth.accounts.sign(txHash, privateKey);
+        return JSON.stringify(signatureObj);
     }
 
     public async checkOut() {

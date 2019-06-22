@@ -66,7 +66,7 @@ export class StartTripPage implements OnInit {
             )
             .on('receipt', (receipt) => {
                 this.tripService.currentTrip.checkInHash = receipt.transactionHash
-            })
+            });
     }
 
     onFailedScan($event: Error) {

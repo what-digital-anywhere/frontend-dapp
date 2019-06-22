@@ -44,3 +44,4 @@ export class TicketVerificationPage implements OnInit {
 
     }
 }
+
