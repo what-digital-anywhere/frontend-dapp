@@ -8,7 +8,7 @@ import {ToastController} from '@ionic/angular';
     styleUrls: ['./current-trip.component.scss'],
 })
 export class CurrentTripComponent implements OnInit {
-    @Input() tripData = {};
+    @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
 
     constructor(private web3Service: Web3Service, private toastController: ToastController) {
