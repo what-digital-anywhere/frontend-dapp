@@ -24,11 +24,10 @@ export class Web3Service {
 
     public async getWallet() {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
-        debugger;
-        const newAccount = await this.web3.eth.personal.newAccount(privateKey);
+        const newAccount = await this.web3.eth.accounts.privateKeyToAccount(privateKey);
         // const accounts = await this.web3.eth.getAccounts();
-        this.web3.eth.defaultAccount = newAccount;
-        this.accountAddress = newAccount;
-        console.log('added the account from stored private key:', this.accountAddress);
+        console.log('Account created: ', newAccount);
+        this.web3.eth.defaultAccount = newAccount.address;
+        this.accountAddress = newAccount.address;
     }
 }
