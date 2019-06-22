@@ -40,9 +40,9 @@ export class CurrentTripComponent {
     }
 
     public generateTicketString(): string {
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
-        let signatureObj = this.web3.eth.accounts.sign(
-            String(this.tripService.currentTrip.start),
+        const privateKey = localStorage.getItem('PRIVATE_KEY')
+        const signatureObj = this.web3.eth.accounts.sign(
+            this.tripService.currentTrip.start.toString(),
             privateKey
         );
         return JSON.stringify(signatureObj)
