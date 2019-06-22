@@ -68,12 +68,13 @@ export class StartTripPage implements OnInit {
             .on('receipt', (receipt) => {
                 this.onScan.next();
             })
-            .on('error', async (receipt) => {
+            .on('error', async (error) => {
                 const toast = await this.toastController.create({
                     message: 'Check in attempt failed',
                     position: 'bottom',
                 });
                 toast.present();
+                console.log(error);
             });
     }
 

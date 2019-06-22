@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-
+import {Web3Service} from 'app/services/web3/web3.service';
 import {ToastController} from '@ionic/angular';
-import Web3 from 'web3';
-import {TripService} from '../../../services/trip-verification/trip-verification.service';
-import {Web3Service} from '../../../services/web3/web3.service';
+import Web3 from 'web3'
+import {TripService} from 'app/services/trip-verification/trip-verification.service'
 
 @Component({
     selector: 'app-current-trip',
@@ -32,14 +31,6 @@ export class CurrentTripComponent implements OnInit {
             message: 'Check out was successful',
             position: 'bottom',
             buttons: [
-                // {
-                //     side: 'start',
-                //     icon: 'star',
-                //     text: 'Favorite',
-                //     handler: () => {
-                //         console.log('Favorite clicked');
-                //     }
-                // },
                 {
                     text: 'Done',
                     role: 'cancel',
@@ -52,11 +43,12 @@ export class CurrentTripComponent implements OnInit {
     }
 
     public generateTicketString(): string {
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
-        const txHash = this.tripService.currentTrip.checkInHash;
-        this.tripService.currentTrip.checkInHash = '';
-        const signatureObj = this.web3.eth.accounts.sign(txHash, privateKey);
-        return JSON.stringify(signatureObj);
+        const privateKey = localStorage.getItem('PRIVATE_KEY')
+        let signatureObj = this.web3.eth.accounts.sign(
+            this.tripService.currentTrip.start as string,
+            privateKey
+        )
+        return JSON.stringify(signatureObj)
     }
 
     public async checkOut() {

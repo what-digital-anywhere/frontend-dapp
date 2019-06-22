@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../services/web3/web3.service';
 import {PRIVATE_KEY} from '../../app.constants';
 import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
-import {CurrentTrip, TripService} from '../../services/trip-verification/trip-verification.service'
+import {CurrentTrip, TripService} from 'app/services/trip-verification/trip-verification.service'
 
 @Component({
     selector: 'app-trips',
@@ -59,7 +59,8 @@ export class TripsPage implements OnInit {
         this.pastTrips = pastTrips;
 
         for (const trip of result) {
-            if (!trip.isCheckedOut) {
+            const isCheckedIn = !trip.isCheckedOut;
+            if (isCheckedIn) {
                 const currentTrip = {
                     start: new Date(trip.startTimestamp.toNumber() * 1000),
                     end: new Date(trip.endTimestamp.toNumber() * 1000),
@@ -70,7 +71,7 @@ export class TripsPage implements OnInit {
                     isPaid: trip.isPaid
                 };
                 console.log('currentTrip:', currentTrip);
-                this.currentTripService.currentTrip = currentTrip as any as CurrentTrip
+                this.currentTripService.currentTrip = currentTrip as any as CurrentTrip;
                 return;
             }
         }
