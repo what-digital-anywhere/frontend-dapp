@@ -12,15 +12,15 @@ import {TripService} from 'app/services/trip-verification/trip-verification.serv
 export class CurrentTripComponent implements OnInit {
     @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
-    
-    private web3: Web3
+
+    private web3: Web3;
 
     constructor(
         private web3Service: Web3Service,
         private toastController: ToastController,
         private tripService: TripService,
     ) {
-        this.web3 = web3Service.web3 as Web3
+        this.web3 = web3Service.web3 as Web3;
     }
 
     ngOnInit() {

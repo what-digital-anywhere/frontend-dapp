@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastController} from '@ionic/angular'
-import {Web3Service} from 'app/services/web3/web3.service';
+import {ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
-import {TripService} from 'app/services/trip-verification/trip-verification.service'
-import {TabsControllerService} from 'app/services/tabs-controller/tabs-controller.service';
+import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
+import {Web3Service} from '../../services/web3/web3.service';
+import {TripService} from '../../services/trip-verification/trip-verification.service';
 
 @Component({
     selector: 'app-start-trip',
