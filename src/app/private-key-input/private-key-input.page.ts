@@ -20,6 +20,10 @@ export class PrivateKeyInputPage implements OnInit {
     }
 
     submit() {
+        if (!this.privateKey.startsWith('0x')) {
+            this.privateKey = '0x' + this.privateKey;
+        }
+
         localStorage.setItem('PRIVATE_KEY', this.privateKey);
         this.router.navigate(['/tabs/trips']);
     }
