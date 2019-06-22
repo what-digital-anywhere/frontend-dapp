@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import {QRCodeModule} from 'angular2-qrcode';
 
 import { TripsPage } from './trips.page';
 import {CurrentTripComponent} from './current-trip/current-trip.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
 
         CommonModule,
         FormsModule,
-        QRCodeModule,
         IonicModule,
         NgxKjuaModule,
         RouterModule.forChild(routes),
