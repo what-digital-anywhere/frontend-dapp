@@ -31,14 +31,6 @@ export class CurrentTripComponent implements OnInit {
             message: 'Check out was successful',
             position: 'bottom',
             buttons: [
-                // {
-                //     side: 'start',
-                //     icon: 'star',
-                //     text: 'Favorite',
-                //     handler: () => {
-                //         console.log('Favorite clicked');
-                //     }
-                // },
                 {
                     text: 'Done',
                     role: 'cancel',
@@ -52,8 +44,10 @@ export class CurrentTripComponent implements OnInit {
 
     public generateTicketString(): string {
         const privateKey = localStorage.getItem('PRIVATE_KEY')
-        let txHash = this.tripService.currentTrip.checkInHash
-        let signatureObj = this.web3.eth.accounts.sign(txHash, privateKey)
+        let signatureObj = this.web3.eth.accounts.sign(
+            this.tripService.currentTrip.start as string,
+            privateKey
+        )
         return JSON.stringify(signatureObj)
     }
 

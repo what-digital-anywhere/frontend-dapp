@@ -9,7 +9,6 @@ export class CurrentTrip {
     price: number
     isCheckedOut: boolean
     isPaid: boolean
-    checkInHash: string
 }
 
 @Injectable({

@@ -13,7 +13,6 @@ export class TicketVerificationPage implements OnInit {
 
     constructor(
         private web3Service: Web3Service,
-        private router: Router,
     ) {
         this.web3 = web3Service.web3 as Web3
     }
@@ -28,9 +27,9 @@ export class TicketVerificationPage implements OnInit {
         (this.web3 as any).contract.passengers.call(
             passengerPubKey,
             (error, result) => {
-                console.log('res')
-                console.log(result)
-                console.log(error)
+                console.log('res');
+                console.log(result);
+                console.log(error);
             },
         )
     }
