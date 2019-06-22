@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
+import Web3 from 'web3';
 import {Web3Service} from '../../services/web3/web3.service';
-import {CurrentTrip, TripService} from 'app/services/trip-verification/trip-verification.service'
+import {CurrentTrip, TripService} from 'app/services/trip-verification/trip-verification.service';
 
 @Component({
     selector: 'app-trips',
@@ -41,7 +42,7 @@ export class TripsPage {
                 end: new Date(Number(trip.endTimestamp) * 1000),
                 transporter: trip.transporter,
                 passenger: trip.passenger,
-                price: trip.price,
+                price:  Web3.utils.fromWei(trip.price, 'ether'),
                 isCheckedOut: trip.isCheckedOut,
                 isPaid: trip.isPaid,
             };

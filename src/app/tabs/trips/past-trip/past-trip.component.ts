@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import Web3 from 'web3';
 import {Web3Service} from '../../../services/web3/web3.service';
 
 interface IPastTripData {
@@ -27,7 +28,7 @@ export class PastTripComponent implements OnInit {
 
     async startPayment(trip: IPastTripData) {
         const from = this.web3Service.accountAddress;
-        const value = trip.price;
+        const value = Web3.utils.toWei(trip.price, 'ether');
         const gasPrice = await this.web3Service.contract.methods.payForTrip(trip.idx).estimateGas({
             from,
         });
