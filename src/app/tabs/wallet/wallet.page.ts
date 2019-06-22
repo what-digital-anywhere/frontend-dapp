@@ -24,11 +24,11 @@ export class WalletPage implements OnInit {
         });
     }
 
-    public async logOut() {
-        await this.web3Service.web3.eth.accounts.wallet.clear();
+    public logOut() {
+        this.web3Service.web3.eth.accounts.wallet.clear();
+        this.web3Service.web3.eth.accounts.wallet.remove(this.walletAddress);
         this.web3Service.web3.eth.defaultAccount = null;
         localStorage.removeItem('PRIVATE_KEY');
-        console.log('Removing private key...');
         this.router.navigate(['connect']);
     }
 }
