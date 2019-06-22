@@ -19,10 +19,10 @@ export class Web3Service {
         this.web3 = new Web3('ws://159.100.249.117:8545');
         this.contract = new this.web3.eth.Contract(ABI, SC_TICKETNG_ADDRESS);
         console.log('Contract: ', this.contract);
-        this.getWallet();
+        // this.createAccount();
     }
 
-    public async getWallet() {
+    public async createAccount() {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
         const newAccount = await this.web3.eth.accounts.privateKeyToAccount(privateKey);
         // const accounts = await this.web3.eth.getAccounts();

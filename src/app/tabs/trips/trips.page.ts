@@ -15,11 +15,11 @@ export class TripsPage implements OnInit {
     constructor(private web3Service: Web3Service) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
-        console.log('privateKey:', privateKey);
+        console.log('privateKey:', privateKey, this.web3Service.accountAddress);
 
-        const result = this.web3Service.contract.methods.getTrips(
+        const result = await this.web3Service.contract.methods.getTrips(
             this.web3Service.accountAddress,
         ).call({
             from: this.web3Service.accountAddress,
