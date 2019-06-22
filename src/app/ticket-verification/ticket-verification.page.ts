@@ -17,7 +17,7 @@ export class TicketVerificationPage implements OnInit {
 
 
   }
-  
+
   generateTicket() {
     let web3: Web3 = this.web3Service.web3 as Web3
     const privateKey = localStorage.getItem('PRIVATE_KEY');
