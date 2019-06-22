@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Web3Service} from 'app/services/web3/web3.service';
+import {ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
-import {TripService} from 'app/services/trip-verification/trip-verification.service'
 import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
+import {Web3Service} from '../../services/web3/web3.service';
+import {TripService} from '../../services/trip-verification/trip-verification.service';
 
 @Component({
     selector: 'app-start-trip',
@@ -21,6 +22,7 @@ export class StartTripPage implements OnInit {
         private web3Service: Web3Service,
         private router: Router,
         private tripService: TripService,
+        private toastController: ToastController,
     ) {
     }
 
@@ -62,10 +64,16 @@ export class StartTripPage implements OnInit {
                     from: this.web3Service.accountAddress,
                     gas: 3000000,
                 },
-                () => this.onScan.next(),
             )
             .on('receipt', (receipt) => {
-                this.tripService.currentTrip.checkInHash = receipt.transactionHash
+                this.onScan.next();
+            })
+            .on('error', async (receipt) => {
+                const toast = await this.toastController.create({
+                    message: 'Check in attempt failed',
+                    position: 'bottom',
+                });
+                toast.present();
             });
     }
 
