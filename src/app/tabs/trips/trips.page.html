@@ -10,8 +10,8 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="currentTrip">
-        <app-current-trip (updateCheckOutStatus)="onCheckotOut()" [tripData]="currentTrip"></app-current-trip>
+    <div *ngIf="currentTripService.currentTrip">
+        <app-current-trip (updateCheckOutStatus)="onCheckotOut()" [tripData]="currentTripService.currentTrip"></app-current-trip>
     </div>
 
     <div *ngFor="let trip of pastTrips">

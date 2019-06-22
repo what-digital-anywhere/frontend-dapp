@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../services/web3/web3.service';
 import Web3 from 'web3'
 import {Router} from '@angular/router'
+import {TripService} from '../services/trip-verification/trip-verification.service'
 
 const l = console.log
 
@@ -12,7 +13,11 @@ const l = console.log
 export class TicketVerificationPage implements OnInit {
     web3: Web3
 
-    constructor(private web3Service: Web3Service, private router: Router) {
+    constructor(
+        private web3Service: Web3Service,
+        private router: Router,
+        private tripService: TripService,
+    ) {
         this.web3 = web3Service.web3 as Web3
     }
 
@@ -20,19 +25,17 @@ export class TicketVerificationPage implements OnInit {
 
     }
 
-    generateTicket() {
-        let web3: Web3 = this.web3Service.web3 as Web3
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
-        let txHash = `tx hash 0x5077cb8488a849bc87a5996e730a07d3ddda29949ad6d7a5461ae0e6659876a5`
-        let sig_obj = web3.eth.accounts.sign(txHash, privateKey)
-        let sigString = JSON.stringify(sig_obj)
-        return sigString
-    }
-
-    onSuccessfulScanned(signatureObjString: string) {
+    async onSuccessfulScanned(signatureObjString: string) {
         let signatureObj: Object = JSON.parse(signatureObjString)
-        let publicKey: string = this.web3.eth.accounts.recover(signatureObj)
-        publicKey
+        let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj)
+        await this.web3.contract.passengers.call(
+            passengerPubKey,
+            (error, result) => {
+                console.log('res')
+                console.log(result)
+                console.log(error)
+            },
+        )
     }
 
     onFailedScan(result: any) {

@@ -17,7 +17,7 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <ion-button [disabled]="!transporterPubKey" (click)="submit()" color="primary" expand="full">
+                <ion-button [disabled]="!transporterPubKey" (click)="checkIn()" color="primary" expand="full">
                     <ion-text>Submit Transporter Pub Key</ion-text>
                 </ion-button>
             </ion-col>
@@ -30,7 +30,7 @@
                     (scanFailure)="onFailedScan($event)"
                     [autofocusEnabled]="true"
                     [formats]="['QR_CODE']"
-                    (scanSuccess)="onSuccessfulScanned($event)">
+                    (scanSuccess)="checkIn($event)">
             </zxing-scanner>
         </ion-row>
     </ion-grid>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../services/web3/web3.service';
 import {PRIVATE_KEY} from '../../app.constants';
+import {CurrentTrip, TripService} from '../../services/trip-verification/trip-verification.service'
 
 @Component({
     selector: 'app-trips',
@@ -10,9 +11,11 @@ import {PRIVATE_KEY} from '../../app.constants';
 export class TripsPage implements OnInit {
 
     public pastTrips = [];
-    public currentTrip;
 
-    constructor(private web3Service: Web3Service) {
+    constructor(
+        private web3Service: Web3Service,
+        private currentTripService: TripService,
+    ) {
     }
 
     async ngOnInit() {
@@ -29,9 +32,9 @@ export class TripsPage implements OnInit {
     }
 
     onCheckotOut() {
-        this.currentTrip.isCheckedOut = true;
-        this.pastTrips.unshift(this.currentTrip);
-        this.currentTrip = null;
+        this.currentTripService.currentTrip.isCheckedOut = true;
+        this.pastTrips.unshift(this.currentTripService.currentTrip);
+        this.currentTripService.currentTrip = null;
     }
 
     public createTripsObject(result) {
@@ -62,7 +65,7 @@ export class TripsPage implements OnInit {
                     isPaid: trip.isPaid
                 };
                 console.log('currentTrip:', currentTrip);
-                this.currentTrip = currentTrip;
+                this.currentTripService.currentTrip = currentTrip as any as CurrentTrip
                 return;
             }
         }
