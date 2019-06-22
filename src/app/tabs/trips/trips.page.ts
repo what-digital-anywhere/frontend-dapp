@@ -59,7 +59,8 @@ export class TripsPage implements OnInit {
         this.pastTrips = pastTrips;
 
         for (const trip of result) {
-            if (!trip.isCheckedOut) {
+            const isCheckedIn = !trip.isCheckedOut;
+            if (isCheckedIn) {
                 const currentTrip = {
                     start: new Date(trip.startTimestamp.toNumber() * 1000),
                     end: new Date(trip.endTimestamp.toNumber() * 1000),
@@ -70,7 +71,7 @@ export class TripsPage implements OnInit {
                     isPaid: trip.isPaid
                 };
                 console.log('currentTrip:', currentTrip);
-                this.currentTripService.currentTrip = currentTrip as any as CurrentTrip
+                this.currentTripService.currentTrip = currentTrip as any as CurrentTrip;
                 return;
             }
         }
