@@ -49,7 +49,7 @@ export class TripsPage {
         }).filter(trip => trip.isCheckedOut);
         console.log('Past Trips:', pastTrips);
 
-        this.pastTrips = pastTrips;
+        this.pastTrips = pastTrips.reverse();
 
         for (const trip of result) {
             const isCheckedIn = !trip.isCheckedOut;

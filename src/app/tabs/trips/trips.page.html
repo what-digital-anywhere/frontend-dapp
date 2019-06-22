@@ -14,7 +14,7 @@
         <app-current-trip (updateCheckOutStatus)="onCheckotOut()" [tripData]="currentTripService.currentTrip"></app-current-trip>
     </div>
 
-    <div *ngFor="let trip of pastTrips.reverse()">
+    <div *ngFor="let trip of pastTrips">
         <app-past-trip [tripData]="trip"></app-past-trip>
     </div>
 </ion-content>
