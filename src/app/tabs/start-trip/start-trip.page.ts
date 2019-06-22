@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Web3Service} from '../../services/web3.service';
+import {Web3Service} from '../../services/web3/web3.service';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 
@@ -28,20 +28,18 @@ export class StartTripPage implements OnInit {
     }
 
     updateKey(ev: any) {
+        console.log(ev.detail, ev.detail.value.length);
         this.transporterPubKey = ev.detail.value;
     }
 
 
     async submit() {
-        // check in via web3!
-        this.web3Service.contract.methods.checkIn(
+       this.web3Service.contract.methods.checkIn(
             this.transporterPubKey,
         ).send({
             from: this.web3Service.accountAddress,
             gas: 3000000,
-        }, () => this.onScan.next())
-        // this.isScannerEnabled = false;
-        // this.presentToastWithOptions();
+        }, () => this.onScan.next());
     }
 
 

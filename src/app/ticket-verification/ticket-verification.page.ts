@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Web3Service} from '../services/web3.service';
+import {Web3Service} from '../services/web3/web3.service';
 import {PRIVATE_KEY} from '../app.constants'
 
 @Component({
@@ -14,7 +14,7 @@ export class TicketVerificationPage implements OnInit {
   }
 
   onSuccessfulScanned(result) {
-    
+
   }
 
   onFailedScan(result: any) {
