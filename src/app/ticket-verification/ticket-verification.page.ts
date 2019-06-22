@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../services/web3/web3.service';
-import {Router} from '@angular/router'
 import Web3 from 'web3';
 
 
@@ -22,16 +21,18 @@ export class TicketVerificationPage implements OnInit {
     }
 
     async onSuccessfulScanned(signatureObjString: string) {
-        let signatureObj = JSON.parse(signatureObjString);
-        let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj);
-        (this.web3 as any).contract.passengers.call(
-            passengerPubKey,
-            (error, result) => {
-                console.log('res');
-                console.log(result);
-                console.log(error);
-            },
-        )
+        alert("dsadasdasda")
+        console.log('scanned');
+        // let signatureObj = JSON.parse(signatureObjString);
+        // let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj);
+        // (this.web3 as any).contract.passengers.call(
+        //     passengerPubKey,
+        //     (error, result) => {
+        //         console.log('res');
+        //         console.log(result);
+        //         console.log(error);
+        //     },
+        // )
     }
 
     onFailedScan(result: any) {
@@ -39,7 +40,7 @@ export class TicketVerificationPage implements OnInit {
     }
 
     onErrorInScanning(result: Error) {
-        // console.log(result);
+        console.log(result);
 
     }
 }

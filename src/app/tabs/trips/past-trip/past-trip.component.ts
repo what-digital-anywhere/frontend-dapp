@@ -32,7 +32,7 @@ export class PastTripComponent implements OnInit {
             from,
         });
 
-        const txResult = await this.web3Service.contract.methods.payForTrip(tripIdx).send({
+        const txResult = await this.web3Service.contract.methods.payForTrip(trip.idx).send({
             from,
             gasPrice,
             value,

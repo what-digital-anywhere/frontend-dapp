@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import ABI from '../../../../resources/data/transportly-abi';
-import Web3 from 'web3/dist/web3.esm.js';
 import {Contract} from 'web3-eth-contract';
+import Web3 from 'web3';
 
 
 @Injectable({
@@ -9,7 +9,7 @@ import {Contract} from 'web3-eth-contract';
 })
 export class Web3Service {
     public web3: Web3;
-    public contract: Contract;
+    public contract: any;
     public privateKey = '';
     public accountAddress = '';
 
@@ -23,13 +23,13 @@ export class Web3Service {
             this.web3 = new Web3('ws://159.100.249.117:8545');
         }
 
-        this.contract = new this.web3.eth.Contract(ABI, SC_TICKETNG_ADDRESS);
+        this.contract = new this.web3.eth.Contract(ABI as any, SC_TICKETNG_ADDRESS);
         console.log('Contract: ', this.contract);
         // this.createAccount();
     }
 
     public async createAccount() {
-        let privateKey = localStorage.getItem('PRIVATE_KEY');
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
 
         if (!privateKey) {
             return Promise.resolve(false);

@@ -24,7 +24,7 @@
 <!--            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0">-->
             <ion-row >
                 <ion-col sizeXs="12">
-                    <ion-button (click)="startPayment(tripData.idx)" size="block" color="light">
+                    <ion-button (click)="startPayment(tripData)" size="block" color="light">
                         <ion-text color="primary">
                             Pay now
                         </ion-text>

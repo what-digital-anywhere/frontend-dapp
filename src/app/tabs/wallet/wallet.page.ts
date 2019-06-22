@@ -20,7 +20,7 @@ export class WalletPage implements OnInit {
     ngOnInit() {
         this.walletAddress = this.web3Service.accountAddress;
         this.web3Service.web3.eth.getBalance(this.web3Service.accountAddress).then((balance) => {
-            this.balance = Math.round(balance / 10000000000000000) / 100;
+            this.balance = Math.round(parseFloat(balance) / 10000000000000000) / 100;
         });
     }
 
