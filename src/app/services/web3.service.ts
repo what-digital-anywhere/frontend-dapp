@@ -1,22 +1,34 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import ABI from '../../../resources/data/transportly-abi';
 import Web3 from 'web3/dist/web3.esm.js';
 
 
-
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class Web3Service {
-  public web3: Web3;
-  public contract: any;
-  public privateKey = '';
-  constructor() {
+    public web3: Web3;
+    public contract: any;
+    public privateKey = '';
+    public accountAddress = '';
 
-    // TODO: move this to the correct location
-    const SC_TICKETNG_ADDRESS = '0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec';
-    this.web3 = new Web3('ws://159.100.249.117:8545');
-    this.contract = new this.web3.eth.Contract(ABI, SC_TICKETNG_ADDRESS);
-    console.log('Contract: ', this.contract);
-  }
+    constructor() {
+
+        // TODO: move this to the correct location
+        const SC_TICKETNG_ADDRESS = '0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec';
+        this.web3 = new Web3('ws://159.100.249.117:8545');
+        this.contract = new this.web3.eth.Contract(ABI, SC_TICKETNG_ADDRESS);
+        console.log('Contract: ', this.contract);
+        this.getWallet();
+    }
+
+    public async getWallet() {
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
+        debugger;
+        const newAccount = await this.web3.eth.personal.newAccount(privateKey);
+        // const accounts = await this.web3.eth.getAccounts();
+        this.web3.eth.defaultAccount = newAccount;
+        this.accountAddress = newAccount;
+        console.log('added the account from stored private key:', this.accountAddress);
+    }
 }

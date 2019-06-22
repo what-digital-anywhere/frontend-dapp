@@ -19,19 +19,14 @@ export class TripsPage implements OnInit {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
         console.log('privateKey:', privateKey);
 
-        this.web3Service.web3.eth.personal.newAccount(privateKey, async () => {
-            const accounts = await this.web3Service.web3.eth.getAccounts();
-            const account = accounts[0];
-            this.web3Service.web3.eth.defaultAccount = account;
-            const result = await this.web3Service.contract.methods.getTrips(
-                account,
-            ).call({
-                from: account,
-            });
-
-            this.createTripsObject(result);
-
+        const result = this.web3Service.contract.methods.getTrips(
+            this.web3Service.accountAddress,
+        ).call({
+            from: this.web3Service.accountAddress,
         });
+
+        this.createTripsObject(result);
+
     }
 
     public createTripsObject(result) {
