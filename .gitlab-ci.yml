@@ -1,0 +1,48 @@
+image: alpine:latest
+
+before_script:
+  # install required packages
+  - apk update && apk add bash openssh-client python git python python-dev ansible python-dev py-pip
+  - bash
+  - pip install --upgrade pip
+  - pip install boto httplib2
+
+  # trust gitlab.com
+  - mkdir ~/.ssh/
+  - touch ~/.ssh/known_hosts
+  - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
+
+  # dump ssh key
+  - echo "$ANSIBLE_PROJECT_DEPLOY_KEY" > ansible-project-deploy-key.pem
+  - chmod 600 ansible-project-deploy-key.pem
+
+  # Run ssh-agent (inside the build environment)
+  - eval $(ssh-agent -s)
+
+  # clone the ansible script
+  # http://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use
+  - ssh-agent sh -c "ssh-add ansible-project-deploy-key.pem; git clone git@gitlab.com:what-digital/deploy-staticpage.git deploy-script"
+
+  # get deploy script
+  - cd deploy-script
+  - git submodule update --recursive
+
+  # copy credentials to their place
+  - mkdir credentials
+  - echo "$SERVER_SSH_KEY" > credentials/server-mobility-frontend.pem
+  - echo "$SECRETS_YML" > credentials/secrets-mobility-frontend.yml
+  - chmod 600 -R credentials/*
+
+
+stages:
+  - deploy
+
+deploy to production:
+  stage: deploy
+  script:
+    - ./deploy mobility-frontend 3-deploy-site.yml
+  environment:
+    name: production
+    url: https://anywhere.what.digital
+  only:
+    - master
