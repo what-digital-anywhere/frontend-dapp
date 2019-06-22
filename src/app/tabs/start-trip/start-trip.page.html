@@ -1,16 +1,37 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-          Start Trip
+            Check-In
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-    <zxing-scanner
-            (scanError)="onErrorInScanning($event)"
-            (scanFailure)="onFailedScan($event)"
-            [autofocusEnabled]="true"
-            [formats]="['QR_CODE']"
-            (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-textarea (ionChange)="updateKey($event)"></ion-textarea>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="submit()" color="primary" expand="full">
+                    <ion-text>Submit Transporter Pub Key</ion-text>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <zxing-scanner
+                    (scanError)="onErrorInScanning($event)"
+                    (scanFailure)="onFailedScan($event)"
+                    [autofocusEnabled]="true"
+                    [formats]="['QR_CODE']"
+                    (scanSuccess)="onSuccessfulScanned($event)">
+
+            </zxing-scanner>
+        </ion-row>
+    </ion-grid>
 </ion-content>
