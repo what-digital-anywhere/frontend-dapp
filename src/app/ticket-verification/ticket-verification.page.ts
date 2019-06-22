@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../services/web3/web3.service';
-import Web3 from 'web3'
 import {Router} from '@angular/router'
 import Web3 from 'web3';
-import {Router} from '@angular/router';
 
-const l = console.log;
 
 @Component({
     selector: 'app-ticket-verification',
@@ -26,9 +23,9 @@ export class TicketVerificationPage implements OnInit {
     }
 
     async onSuccessfulScanned(signatureObjString: string) {
-        let signatureObj: Object = JSON.parse(signatureObjString)
-        let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj)
-        this.web3.contract.passengers.call(
+        let signatureObj = JSON.parse(signatureObjString);
+        let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj);
+        (this.web3 as any).contract.passengers.call(
             passengerPubKey,
             (error, result) => {
                 console.log('res')

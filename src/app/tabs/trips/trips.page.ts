@@ -15,7 +15,7 @@ export class TripsPage implements OnInit {
 
     constructor(
         private web3Service: Web3Service,
-        private currentTripService: TripService,
+        public currentTripService: TripService,
         private tabsController: TabsControllerService,
     ) {
     }
