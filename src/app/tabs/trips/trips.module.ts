@@ -9,6 +9,7 @@ import { TripsPage } from './trips.page';
 import {CurrentTripComponent} from './current-trip/current-trip.component';
 import {PastTripComponent} from './past-trip/past-trip.component';
 import {NgxKjuaModule} from 'ngx-kjua';
+import {AccordionComponent} from './accordion/accordion.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,6 @@ const routes: Routes = [
         NgxKjuaModule,
         RouterModule.forChild(routes),
     ],
-  declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
+  declarations: [TripsPage, CurrentTripComponent, PastTripComponent, AccordionComponent]
 })
 export class TripsPageModule {}
