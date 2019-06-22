@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Web3Service} from '../../services/web3/web3.service';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
@@ -21,14 +21,18 @@ export class StartTripPage implements OnInit {
         private router: Router,
     ) {
     }
-    ionViewWillLeave() {
-        console.log("??? leave ???")
+
+    ionViewWillEnter() {
+        this.isScannerEnabled = true;
     }
+
+    ionViewWillLeave() {
+        console.log('will leave');
+        this.isScannerEnabled = false;
+    }
+
+
     ngOnInit() {
-        this.tabsController.tabSubject.subscribe(async name => {
-            console.log(name);
-            this.isScannerEnabled = (name === 'start-trip');
-        });
         this.onScan.subscribe(() => {
             this.isScannerEnabled = false;
             this.router.navigate(['/tabs/trips']);

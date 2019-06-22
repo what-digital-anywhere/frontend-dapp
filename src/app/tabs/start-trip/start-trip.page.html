@@ -25,12 +25,12 @@
 
         <ion-row>
             <zxing-scanner
-                    [enable]="isScannerEnabled"
-                    (scanError)="onErrorInScanning($event)"
-                    (scanFailure)="onFailedScan($event)"
-                    [autofocusEnabled]="true"
-                    [formats]="['QR_CODE']"
-                    (scanSuccess)="onSuccessfulScanned($event)">
+              *ngIf="isScannerEnabled"
+              (scanError)="onErrorInScanning($event)"
+              (scanFailure)="onFailedScan($event)"
+              [autofocusEnabled]="true"
+              [formats]="['QR_CODE']"
+              (scanSuccess)="onSuccessfulScanned($event)">
             </zxing-scanner>
         </ion-row>
     </ion-grid>
