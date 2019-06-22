@@ -10,9 +10,8 @@ export class TabsPage {
 
   constructor(private tabController: TabsControllerService) {}
 
-  handleTabWillChange(tab) {
-    console.log(tab);
-    // this.tabController.tabSubject.next()
+  handleTabWillChange({tab}) {
+    this.tabController.tabSubject.next(tab);
   }
 
 }

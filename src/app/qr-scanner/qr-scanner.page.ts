@@ -8,11 +8,12 @@ import {PRIVATE_KEY} from '../app.constants';
   templateUrl: './qr-scanner.page.html',
   styleUrls: ['./qr-scanner.page.scss'],
 })
-export class QrScannerPage implements OnInit {
+export class QrScannerPage{
 
   constructor(private web3Service: Web3Service, private router: Router) { }
-
-  ngOnInit() {
+  public isScannerEnabled = true;
+  ionViewWillEnter() {
+    this.isScannerEnabled = true;
   }
 
   onSuccessfulScanned(result) {
@@ -28,5 +29,10 @@ export class QrScannerPage implements OnInit {
   onErrorInScanning(result: Error) {
     // console.log(result);
 
+  }
+
+  ionViewWillLeave() {
+    console.log('will leave');
+    this.isScannerEnabled = false;
   }
 }

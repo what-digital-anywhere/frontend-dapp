@@ -16,7 +16,12 @@ export class Web3Service {
 
         // TODO: move this to the correct location
         const SC_TICKETNG_ADDRESS = '0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec';
-        this.web3 = new Web3('ws://159.100.249.117:8545');
+        if (window.location.host === 'anywhere.what.digital') {
+            this.web3 = new Web3('wss://eth-testnode.what.digital');
+        } else {
+            this.web3 = new Web3('ws://159.100.249.117:8545');
+        }
+
         this.contract = new this.web3.eth.Contract(ABI, SC_TICKETNG_ADDRESS);
         console.log('Contract: ', this.contract);
         // this.createAccount();

@@ -3,6 +3,7 @@ import {Web3Service} from 'app/services/web3/web3.service';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {TripService} from 'app/services/trip-verification/trip-verification.service'
+import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
 
 @Component({
     selector: 'app-start-trip',
@@ -16,13 +17,20 @@ export class StartTripPage implements OnInit {
     public onScan = new Subject();
 
     constructor(
+        private tabsController: TabsControllerService,
         private web3Service: Web3Service,
         private router: Router,
         private tripService: TripService,
     ) {
     }
-
+    ionViewWillLeave() {
+        console.log("??? leave ???")
+    }
     ngOnInit() {
+        this.tabsController.tabSubject.subscribe(async name => {
+            console.log(name);
+            this.isScannerEnabled = (name === 'start-trip');
+        });
         this.onScan.subscribe(() => {
             this.isScannerEnabled = false;
             this.router.navigate(['/tabs/trips']);
@@ -53,5 +61,6 @@ export class StartTripPage implements OnInit {
             })
     }
 
-    onFailedScan($event: Error) {}
+    onFailedScan($event: Error) {
+    }
 }

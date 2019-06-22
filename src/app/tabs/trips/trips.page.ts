@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../services/web3/web3.service';
 import {PRIVATE_KEY} from '../../app.constants';
+import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
 import {CurrentTrip, TripService} from '../../services/trip-verification/trip-verification.service'
 
 @Component({
@@ -15,20 +16,24 @@ export class TripsPage implements OnInit {
     constructor(
         private web3Service: Web3Service,
         private currentTripService: TripService,
+        private tabsController: TabsControllerService,
     ) {
     }
 
     async ngOnInit() {
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
-        console.log('privateKey:', privateKey, this.web3Service.accountAddress);
+        this.tabsController.tabSubject.subscribe(async name => {
+            if (name !== 'trips') return;
+            const privateKey = localStorage.getItem('PRIVATE_KEY');
 
-        const result = await this.web3Service.contract.methods.getTrips(
-            this.web3Service.accountAddress,
-        ).call({
-            from: this.web3Service.accountAddress,
+            const result = await this.web3Service.contract.methods.getTrips(
+                this.web3Service.accountAddress,
+            ).call({
+                from: this.web3Service.accountAddress,
+            });
+
+            this.createTripsObject(result);
         });
 
-        this.createTripsObject(result);
     }
 
     onCheckotOut() {

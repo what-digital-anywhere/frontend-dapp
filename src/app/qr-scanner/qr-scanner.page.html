@@ -12,6 +12,7 @@
             (scanFailure)="onFailedScan($event)"
             [autofocusEnabled]="true"
             [formats]="['QR_CODE']"
+            [enable]="isScannerEnabled"
             (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
 </ion-content>
 
