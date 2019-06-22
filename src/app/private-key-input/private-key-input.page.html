@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/connect" text="" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Provide your private key</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-textarea (ionChange)="updateKey($event)"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="submit()" color="primary" expand="full"><ion-text>Save it</ion-text></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

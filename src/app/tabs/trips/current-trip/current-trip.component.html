@@ -8,14 +8,13 @@
                          alt="">
                 </ion-col>
                 <ion-col sizeXs="7">
-                    <p>{{tripData.starting_place}}</p>
-                    <p>{{tripData.startedAt}}</p>
-                    <p>{{tripData.provider}}</p>
+                    <p>{{tripData.start}}</p>
+                    <p>{{tripData.transporter}}</p>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col sizeXs="12">
-                    <ion-button size="block" color="light">
+                    <ion-button size="block" color="light" (click)="checkOut()">
                         <ion-text color="primary">
                             Check Out
                         </ion-text>
