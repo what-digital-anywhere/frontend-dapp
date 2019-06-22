@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Web3Service} from '../services/web3.service';
+import {Web3Service} from '../services/web3/web3.service';
 import Web3 from 'web3'
 import {Router} from '@angular/router'
 
