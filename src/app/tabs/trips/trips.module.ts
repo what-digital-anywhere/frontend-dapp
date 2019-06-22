@@ -8,8 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { TripsPage } from './trips.page';
 import {CurrentTripComponent} from './current-trip/current-trip.component';
 import {PastTripComponent} from './past-trip/past-trip.component';
-import {NgxKjuaModule} from 'ngx-kjua'
-import {QRCodeModule} from 'angular2-qrcode';
+import {NgxKjuaModule} from 'ngx-kjua';
 
 const routes: Routes = [
   {
@@ -26,7 +25,6 @@ const routes: Routes = [
         IonicModule,
         NgxKjuaModule,
         RouterModule.forChild(routes),
-        QRCodeModule,
     ],
   declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
 })
