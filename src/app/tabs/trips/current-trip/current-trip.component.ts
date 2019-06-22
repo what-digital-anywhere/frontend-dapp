@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Web3Service} from '../../../services/web3.service';
+import {Web3Service} from '../../../services/web3/web3.service';
 import {ToastController} from '@ionic/angular';
 import Web3 from 'web3'
 
@@ -9,7 +9,7 @@ import Web3 from 'web3'
     styleUrls: ['./current-trip.component.scss'],
 })
 export class CurrentTripComponent implements OnInit {
-    @Input() tripData = {};
+    @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
     
     private web3: Web3

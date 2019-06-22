@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import ABI from '../../../resources/data/transportly-abi';
+import ABI from '../../../../resources/data/transportly-abi';
 import Web3 from 'web3/dist/web3.esm.js';
 
 
