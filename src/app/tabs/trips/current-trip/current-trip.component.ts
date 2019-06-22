@@ -43,7 +43,6 @@ export class CurrentTripComponent implements OnInit {
 
 
     public async checkOut() {
-
         this.presentToastWithOptions();
         const result = await this.web3Service.contract.methods.checkOut().send({
             from: this.web3Service.accountAddress,

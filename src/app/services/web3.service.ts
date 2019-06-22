@@ -24,6 +24,9 @@ export class Web3Service {
 
     public async createAccount() {
         const privateKey = localStorage.getItem('PRIVATE_KEY');
+        if (!privateKey) {
+            return Promise.resolve(false);
+        }
         const newAccount = await this.web3.eth.accounts.privateKeyToAccount(privateKey);
         // const accounts = await this.web3.eth.getAccounts();
         console.log('Account created: ', newAccount);
