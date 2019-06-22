@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Web3Service} from '../../../services/web3.service';
 import {ToastController} from '@ionic/angular';
 
@@ -9,7 +9,7 @@ import {ToastController} from '@ionic/angular';
 })
 export class CurrentTripComponent implements OnInit {
     @Input() tripData = {};
-    @Output()
+    @Output() updateCheckOutStatus = new EventEmitter();
 
     constructor(private web3Service: Web3Service, private toastController: ToastController) {
     }
@@ -34,7 +34,6 @@ export class CurrentTripComponent implements OnInit {
                     text: 'Done',
                     role: 'cancel',
                     handler: () => {
-                        console.log('Cancel clicked');
                     }
                 }
             ]
@@ -44,11 +43,12 @@ export class CurrentTripComponent implements OnInit {
 
 
     public async checkOut() {
+
         this.presentToastWithOptions();
         const result = await this.web3Service.contract.methods.checkOut().send({
             from: this.web3Service.accountAddress,
             gas: 3000000
-        });
+        }, () => this.updateCheckOutStatus.emit(true));
         console.log(result);
         // TODO: toast a success message and trigger a re-fetch of the trips
     }

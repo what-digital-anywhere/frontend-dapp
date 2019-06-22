@@ -11,7 +11,7 @@
 
 <ion-content>
     <div *ngIf="currentTrip">
-        <app-current-trip [tripData]="currentTrip"></app-current-trip>
+        <app-current-trip (updateCheckOutStatus)="onCheckotOut()" [tripData]="currentTrip"></app-current-trip>
     </div>
 
     <div *ngFor="let trip of pastTrips">

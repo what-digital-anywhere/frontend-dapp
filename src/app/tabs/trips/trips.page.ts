@@ -26,7 +26,12 @@ export class TripsPage implements OnInit {
         });
 
         this.createTripsObject(result);
+    }
 
+    onCheckotOut() {
+        this.currentTrip.isCheckedOut = true;
+        this.pastTrips.unshift(this.currentTrip);
+        this.currentTrip = null;
     }
 
     public createTripsObject(result) {
