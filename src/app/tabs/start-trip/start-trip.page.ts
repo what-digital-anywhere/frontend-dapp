@@ -65,12 +65,6 @@ export class StartTripPage implements OnInit {
         this.web3Service.contract.methods
             .checkIn(this.transporterPubKey)
             .send({from: this.web3Service.accountAddress, gas: 3000000})
-            .on('receipt', (receipt) => {
-                console.log(`check in success`);
-                console.log(receipt);
-                this.isCheckedInButtonPressed = false;
-                this.onScan.next();
-            })
             .on('error', async (error) => {
                 const toast = await this.toastController.create({
                     message: 'Check in attempt failed',
@@ -78,7 +72,14 @@ export class StartTripPage implements OnInit {
                 });
                 toast.present();
                 console.log(error);
+            })
+            .on('receipt', async (receipt) => {
+                console.log(`check in success`);
+                console.log(receipt);
+                this.isCheckedInButtonPressed = false;
+                this.onScan.next();
             });
+
     }
 
     onFailedScan($event: Error) {

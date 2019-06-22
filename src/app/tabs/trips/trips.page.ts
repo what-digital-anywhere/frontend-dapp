@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Web3Service} from '../../services/web3/web3.service';
-import {PRIVATE_KEY} from '../../app.constants';
-import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
 import {CurrentTrip, TripService} from 'app/services/trip-verification/trip-verification.service'
 
 @Component({
@@ -16,13 +14,10 @@ export class TripsPage {
     constructor(
         private web3Service: Web3Service,
         public currentTripService: TripService,
-        private tabsController: TabsControllerService,
     ) {
     }
 
     async ionViewDidEnter() {
-        const privateKey = localStorage.getItem('PRIVATE_KEY');
-
         const result = await this.web3Service.contract.methods.getTrips(
             this.web3Service.accountAddress,
         ).call({
@@ -39,10 +34,11 @@ export class TripsPage {
     }
 
     public createTripsObject(result) {
+        console.log(`createTripsObject`);
         const pastTrips = result.map((trip) => {
             return {
-                start: new Date(trip.startTimestamp.toNumber() * 1000),
-                end: new Date(trip.endTimestamp.toNumber() * 1000),
+                start: new Date(Number(trip.startTimestamp) * 1000),
+                end: new Date(Number(trip.endTimestamp) * 1000),
                 transporter: trip.transporter,
                 passenger: trip.passenger,
                 price: trip.price,
@@ -58,8 +54,8 @@ export class TripsPage {
             const isCheckedIn = !trip.isCheckedOut;
             if (isCheckedIn) {
                 const currentTrip = {
-                    start: new Date(trip.startTimestamp.toNumber() * 1000),
-                    end: new Date(trip.endTimestamp.toNumber() * 1000),
+                    start: new Date(Number(trip.startTimestamp) * 1000),
+                    end: new Date(Number(trip.endTimestamp) * 1000),
                     transporter: trip.transporter,
                     passenger: trip.passenger,
                     price: trip.price,
