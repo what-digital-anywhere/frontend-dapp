@@ -10,6 +10,7 @@ import Web3 from 'web3';
 export class Web3Service {
     public web3: Web3;
     public contract: any;
+    public contractView: any;
     public privateKey = '';
     public accountAddress = '';
 
@@ -24,6 +25,7 @@ export class Web3Service {
         }
 
         this.contract = new this.web3.eth.Contract(ABI as any, SC_TICKETNG_ADDRESS);
+
         console.log('Contract: ', this.contract);
         // this.createAccount();
     }

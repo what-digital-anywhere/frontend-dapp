@@ -7,8 +7,10 @@ import Web3 from 'web3';
     selector: 'app-ticket-verification',
     templateUrl: './ticket-verification.page.html',
 })
-export class TicketVerificationPage implements OnInit {
+export class TicketVerificationPage {
     web3: Web3;
+    public isScannerEnabled = true;
+    public tspPubKey: string = null;
 
     constructor(
         private web3Service: Web3Service,
@@ -16,23 +18,25 @@ export class TicketVerificationPage implements OnInit {
         this.web3 = web3Service.web3 as Web3
     }
 
-    ngOnInit() {
-
-    }
-
     async onSuccessfulScanned(signatureObjString: string) {
-        alert("dsadasdasda")
+        this.isScannerEnabled = false;
+        
         console.log('scanned');
-        // let signatureObj = JSON.parse(signatureObjString);
-        // let passengerPubKey: string = this.web3.eth.accounts.recover(signatureObj);
-        // (this.web3 as any).contract.passengers.call(
-        //     passengerPubKey,
-        //     (error, result) => {
-        //         console.log('res');
-        //         console.log(result);
-        //         console.log(error);
-        //     },
-        // )
+        let array = signatureObjString.split(',');
+        let signature = array[0];
+        let message = array[1];
+        console.log(message);
+        console.log(signature);
+
+        let passengerPubKey: string = this.web3.eth.accounts.recover(message, signature);
+        console.log(passengerPubKey);
+        let passengerData = await this.web3Service.contract.methods
+            .passengers(passengerPubKey)
+            .call();
+        if (passengerData.isCheckedIn === false) {
+            alert('that passenger is not checked in');
+        }
+        this.tspPubKey = passengerData.checkedInTspKey;
     }
 
     onFailedScan(result: any) {

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 
 export class CurrentTrip {
-    start: number;
-    end: number;
+    start: Date;
+    end: Date;
     transporter: string;
     passenger: string;
     price: number;
