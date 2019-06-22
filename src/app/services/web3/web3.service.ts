@@ -16,7 +16,7 @@ export class Web3Service {
     constructor() {
 
         // TODO: move this to the correct location
-        const SC_TICKETNG_ADDRESS = '0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec';
+        const SC_TICKETNG_ADDRESS = '0x49455287eBCC42a875B40724C62519D03e2EDcff';
         if (window.location.host === 'anywhere.what.digital') {
             this.web3 = new Web3('wss://eth-testnode.what.digital');
         } else {
