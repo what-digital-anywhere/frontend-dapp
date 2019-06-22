@@ -1,29 +1,25 @@
 <ion-card>
     <ion-card-content>
         <ion-grid>
-            <ion-row>
-                <ion-col sizeXs="10">
-                    {{tripData.starting_place}}
-                    <ion-icon name="arrow-round-forward"></ion-icon>
-                    {{tripData.destination}}
-                </ion-col>
-            </ion-row>
             <ion-row align-items-end>
+
                 <ion-col sizeXs="8">
-                    <p>Started at: {{tripData.startedAt}}</p>
-                    <p>Finished at: {{tripData.finishedAt}}</p>
-                    <p>{{tripData.provider}}</p>
+                    <p>Trip Start: {{tripData?.start}}</p>
+                    <p>Trip End: {{tripData?.end}}</p>
+                    <p>Transport Company: {{tripData?.transporter}}</p>
                 </ion-col>
+
                 <ion-col sizeXs="4">
                         <ion-text class="price" color="primary">
-                            {{tripData.price}}
+                            Price: {{tripData?.price}}
                         </ion-text>
                     <span>
-                  {{tripData.currency}}
+                  CHF
                 </span>
                 </ion-col>
             </ion-row>
-            <ion-row>
+
+            <ion-row *ngIf="!tripData?.isPaid">
                 <ion-col sizeXs="12">
                     <ion-button size="block" color="light">
                         <ion-text color="primary">
@@ -32,6 +28,7 @@
                     </ion-button>
                 </ion-col>
             </ion-row>
+
         </ion-grid>
     </ion-card-content>
 </ion-card>

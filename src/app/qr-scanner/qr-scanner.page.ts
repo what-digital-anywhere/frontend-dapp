@@ -14,7 +14,7 @@ export class QrScannerPage implements OnInit {
   }
 
   onSuccessfulScanned(result) {
-    localStorage.setItem(PRIVATE_KEY, result);
+    localStorage.setItem('PRIVATE_KEY', result);
     this.web3Service.privateKey = result;
   }
 
