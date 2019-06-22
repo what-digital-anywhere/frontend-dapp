@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./past-trip.component.scss'],
 })
 export class PastTripComponent implements OnInit {
- @Input() tripData = {};
+ @Input() tripData: any = {};
   constructor() { }
 
   ngOnInit() {}

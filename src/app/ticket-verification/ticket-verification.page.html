@@ -7,12 +7,9 @@
 </ion-header>
 
 <ion-content>
-    <zxing-scanner
-            (scanError)="onErrorInScanning($event)"
-            (scanFailure)="onFailedScan($event)"
-            [autofocusEnabled]="true"
-            [formats]="['QR_CODE']"
-            (scanSuccess)="onSuccessfulScanned($event)"></zxing-scanner>
+  <ngx-kjua
+    [text]="generateTicket()"
+  ></ngx-kjua>
 </ion-content>
 
 <ion-footer>

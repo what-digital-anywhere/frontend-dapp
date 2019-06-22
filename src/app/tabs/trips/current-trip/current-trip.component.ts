@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Web3Service} from '../../../services/web3/web3.service';
 import {ToastController} from '@ionic/angular';
+import Web3 from 'web3'
 
 @Component({
     selector: 'app-current-trip',
@@ -8,10 +9,13 @@ import {ToastController} from '@ionic/angular';
     styleUrls: ['./current-trip.component.scss'],
 })
 export class CurrentTripComponent implements OnInit {
-    @Input() tripData = {};
+    @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
+    
+    private web3: Web3
 
     constructor(private web3Service: Web3Service, private toastController: ToastController) {
+        this.web3 = web3Service.web3 as Web3
     }
 
     ngOnInit() {
@@ -39,6 +43,14 @@ export class CurrentTripComponent implements OnInit {
             ]
         });
         toast.present();
+    }
+    
+    public generateTicketString(): string {
+        let web3: Web3 = this.web3Service.web3 as Web3
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
+        let txHash = `tx hash 0x5077cb8488a849bc87a5996e730a07d3ddda29949ad6d7a5461ae0e6659876a5`
+        let sig_obj = web3.eth.accounts.sign(txHash, privateKey)
+        return JSON.stringify(sig_obj)
     }
 
 
