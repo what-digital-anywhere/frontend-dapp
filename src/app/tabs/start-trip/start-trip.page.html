@@ -17,7 +17,7 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <ion-button [disabled]="!transporterPubKey" (click)="checkIn()" color="primary" expand="full">
+                <ion-button [disabled]="!transporterPubKey || isCheckedInButtonPressed" (click)="checkIn()" color="primary" expand="full">
                     <ion-text>Submit Transporter Pub Key</ion-text>
                 </ion-button>
             </ion-col>

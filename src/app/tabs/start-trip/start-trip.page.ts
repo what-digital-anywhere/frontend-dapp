@@ -16,6 +16,7 @@ export class StartTripPage implements OnInit {
 
     public transporterPubKey = '';
     public onScan = new Subject();
+    public isCheckedInButtonPressed: boolean = false;
 
     constructor(
         private tabsController: TabsControllerService,
@@ -57,15 +58,17 @@ export class StartTripPage implements OnInit {
     }
 
     async checkIn(address?: string) {
+        this.isCheckedInButtonPressed = true;
+        
         this.transporterPubKey = address || this.transporterPubKey;
-        this.web3Service.contract.methods.checkIn(this.transporterPubKey)
-            .send(
-                {
-                    from: this.web3Service.accountAddress,
-                    gas: 3000000,
-                },
-            )
+        console.log('check in');
+        this.web3Service.contract.methods
+            .checkIn(this.transporterPubKey)
+            .send({from: this.web3Service.accountAddress, gas: 3000000})
             .on('receipt', (receipt) => {
+                console.log(`check in success`);
+                console.log(receipt);
+                this.isCheckedInButtonPressed = false;
                 this.onScan.next();
             })
             .on('error', async (error) => {

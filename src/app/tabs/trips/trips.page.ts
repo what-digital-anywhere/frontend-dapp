@@ -9,7 +9,7 @@ import {CurrentTrip, TripService} from 'app/services/trip-verification/trip-veri
     templateUrl: './trips.page.html',
     styleUrls: ['./trips.page.scss'],
 })
-export class TripsPage implements OnInit {
+export class TripsPage {
 
     public pastTrips = [];
 
@@ -20,20 +20,16 @@ export class TripsPage implements OnInit {
     ) {
     }
 
-    async ngOnInit() {
-        this.tabsController.tabSubject.subscribe(async name => {
-            if (name !== 'trips') return;
-            const privateKey = localStorage.getItem('PRIVATE_KEY');
+    async ionViewDidEnter() {
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
 
-            const result = await this.web3Service.contract.methods.getTrips(
-                this.web3Service.accountAddress,
-            ).call({
-                from: this.web3Service.accountAddress,
-            });
-
-            this.createTripsObject(result);
+        const result = await this.web3Service.contract.methods.getTrips(
+            this.web3Service.accountAddress,
+        ).call({
+            from: this.web3Service.accountAddress,
         });
 
+        this.createTripsObject(result);
     }
 
     onCheckotOut() {
@@ -51,13 +47,13 @@ export class TripsPage implements OnInit {
                 passenger: trip.passenger,
                 price: trip.price,
                 isCheckedOut: trip.isCheckedOut,
-                isPaid: trip.isPaid
+                isPaid: trip.isPaid,
             };
         }).filter(trip => trip.isCheckedOut);
         console.log('Past Trips:', pastTrips);
 
         this.pastTrips = pastTrips;
-
+        
         for (const trip of result) {
             const isCheckedIn = !trip.isCheckedOut;
             if (isCheckedIn) {

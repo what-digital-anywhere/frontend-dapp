@@ -9,7 +9,7 @@ import {TripService} from 'app/services/trip-verification/trip-verification.serv
     templateUrl: './current-trip.component.html',
     styleUrls: ['./current-trip.component.scss'],
 })
-export class CurrentTripComponent implements OnInit {
+export class CurrentTripComponent {
     @Input() tripData: any = {};
     @Output() updateCheckOutStatus = new EventEmitter();
 
@@ -21,9 +21,6 @@ export class CurrentTripComponent implements OnInit {
         private tripService: TripService,
     ) {
         this.web3 = web3Service.web3 as Web3;
-    }
-
-    ngOnInit() {
     }
 
     async presentToastWithOptions() {
@@ -43,11 +40,11 @@ export class CurrentTripComponent implements OnInit {
     }
 
     public generateTicketString(): string {
-        const privateKey = localStorage.getItem('PRIVATE_KEY')
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
         let signatureObj = this.web3.eth.accounts.sign(
-            this.tripService.currentTrip.start as string,
+            String(this.tripService.currentTrip.start),
             privateKey
-        )
+        );
         return JSON.stringify(signatureObj)
     }
 
