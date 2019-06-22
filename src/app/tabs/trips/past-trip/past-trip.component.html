@@ -21,8 +21,7 @@
                 </ion-col>
             </ion-row>
 
-<!--            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0">-->
-            <ion-row >
+            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0">
                 <ion-col sizeXs="12">
                     <ion-button (click)="startPayment(tripData)" size="block" color="light">
                         <ion-text color="primary">
