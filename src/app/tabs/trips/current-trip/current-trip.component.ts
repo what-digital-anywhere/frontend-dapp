@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TripService} from 'app/services/trip-verification/trip-verification.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Web3Service} from 'app/services/web3/web3.service';
 import {ToastController} from '@ionic/angular';
-import Web3 from 'web3'
-import {TripService} from 'app/services/trip-verification/trip-verification.service'
+import Web3 from 'web3';
 
 @Component({
     selector: 'app-current-trip',
@@ -33,12 +33,12 @@ export class CurrentTripComponent {
     }
 
     public generateTicketString(): string {
-        const privateKey = localStorage.getItem('PRIVATE_KEY')
+        const privateKey = localStorage.getItem('PRIVATE_KEY');
         const signatureObj = this.web3.eth.accounts.sign(
             this.tripService.currentTrip.start.toString(),
             privateKey
         );
-        return JSON.stringify(signatureObj)
+        return signatureObj.signature + ',' + signatureObj.message;
     }
 
     public async checkOut() {

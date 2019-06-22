@@ -9,6 +9,7 @@ import { TripsPage } from './trips.page';
 import {CurrentTripComponent} from './current-trip/current-trip.component';
 import {PastTripComponent} from './past-trip/past-trip.component';
 import {NgxKjuaModule} from 'ngx-kjua'
+import {QRCodeModule} from 'angular2-qrcode';
 
 const routes: Routes = [
   {
@@ -18,14 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
+    imports: [
 
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NgxKjuaModule,
-    RouterModule.forChild(routes),
-  ],
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        NgxKjuaModule,
+        RouterModule.forChild(routes),
+        QRCodeModule,
+    ],
   declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
 })
 export class TripsPageModule {}
