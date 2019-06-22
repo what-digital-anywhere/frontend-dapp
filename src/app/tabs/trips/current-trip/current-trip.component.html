@@ -3,7 +3,9 @@
         <ion-grid>
             <ion-row align-items-center justify-content-center text-center>
                 <ion-col>
-                    <qr-code size="500" [value]="generateTicketString()"></qr-code>
+                    <ngx-kjua
+                        [text]="generateTicketString()"
+                    ></ngx-kjua>
                 </ion-col>
                 <ion-col sizeXs="12">
                     <p>{{tripData.start}}</p>
