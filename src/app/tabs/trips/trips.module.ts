@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { TripsPage } from './trips.page';
 import {CurrentTripComponent} from './current-trip/current-trip.component';
 import {PastTripComponent} from './past-trip/past-trip.component';
+import {NgxKjuaModule} from 'ngx-kjua'
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    NgxKjuaModule,
+    RouterModule.forChild(routes),
   ],
   declarations: [TripsPage, CurrentTripComponent, PastTripComponent]
 })
