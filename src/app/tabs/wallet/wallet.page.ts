@@ -24,7 +24,9 @@ export class WalletPage implements OnInit {
         });
     }
 
-    public logOut() {
+    public async logOut() {
+        await this.web3Service.web3.eth.accounts.wallet.clear();
+        this.web3Service.web3.eth.defaultAccount = null;
         localStorage.removeItem('PRIVATE_KEY');
         console.log('Removing private key...');
         this.router.navigate(['connect']);
