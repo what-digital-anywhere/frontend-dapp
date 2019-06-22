@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import ABI from '../../../../resources/data/transportly-abi';
 import Web3 from 'web3/dist/web3.esm.js';
+import {Contract} from 'web3-eth-contract';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import Web3 from 'web3/dist/web3.esm.js';
 })
 export class Web3Service {
     public web3: Web3;
-    public contract: any;
+    public contract: Contract;
     public privateKey = '';
     public accountAddress = '';
 

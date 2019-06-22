@@ -39,8 +39,9 @@ export class TripsPage {
     }
 
     public createTripsObject(result) {
-        const pastTrips = result.map((trip) => {
+        const pastTrips = result.map((trip, idx) => {
             return {
+                idx,
                 start: new Date(trip.startTimestamp.toNumber() * 1000),
                 end: new Date(trip.endTimestamp.toNumber() * 1000),
                 transporter: trip.transporter,
@@ -53,7 +54,7 @@ export class TripsPage {
         console.log('Past Trips:', pastTrips);
 
         this.pastTrips = pastTrips;
-        
+
         for (const trip of result) {
             const isCheckedIn = !trip.isCheckedOut;
             if (isCheckedIn) {

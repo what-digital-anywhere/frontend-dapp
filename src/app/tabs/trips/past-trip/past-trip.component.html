@@ -11,17 +11,20 @@
 
                 <ion-col sizeXs="4">
                         <ion-text class="price" color="primary">
-                            Price: {{tripData?.price}}
+                            Price:
+                            <span *ngIf="tripData?.price > 0">{{tripData?.price}}</span>
+                            <span *ngIf="tripData?.price <= 0">Pending...</span>
                         </ion-text>
-                    <span>
+                    <span *ngIf="tripData?.price > 0">
                   CHF
                 </span>
                 </ion-col>
             </ion-row>
 
-            <ion-row *ngIf="!tripData?.isPaid">
+<!--            <ion-row *ngIf="!tripData?.isPaid && tripData?.price > 0">-->
+            <ion-row >
                 <ion-col sizeXs="12">
-                    <ion-button size="block" color="light">
+                    <ion-button (click)="startPayment(tripData.idx)" size="block" color="light">
                         <ion-text color="primary">
                             Pay now
                         </ion-text>
