@@ -25,6 +25,7 @@
 
         <ion-row>
             <zxing-scanner
+                    [enable]="isScannerEnabled"
                     (scanError)="onErrorInScanning($event)"
                     (scanFailure)="onFailedScan($event)"
                     [autofocusEnabled]="true"

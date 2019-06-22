@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Web3Service} from '../../services/web3.service';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-start-trip',
@@ -8,8 +9,10 @@ import {Router} from '@angular/router';
     styleUrls: ['./start-trip.page.scss'],
 })
 export class StartTripPage implements OnInit {
+    public isScannerEnabled = true;
 
     public transporterPubKey = '';
+    public onScan = new Subject();
 
     constructor(
         private web3Service: Web3Service,
@@ -18,23 +21,27 @@ export class StartTripPage implements OnInit {
     }
 
     ngOnInit() {
+        this.onScan.subscribe(() => {
+        this.isScannerEnabled = false;
+            this.router.navigate(['/tabs/trips']);
+        });
     }
 
     updateKey(ev: any) {
         this.transporterPubKey = ev.detail.value;
     }
 
-    submit() {
+
+    async submit() {
         // check in via web3!
-        const result = this.web3Service.contract.methods.checkIn(
+        this.web3Service.contract.methods.checkIn(
             this.transporterPubKey,
         ).send({
             from: this.web3Service.accountAddress,
             gas: 3000000,
-        });
-        console.log('checked in!', result);
-        // TODO: toast a success message
-        this.router.navigate(['/tabs/trips']);
+        }, () => this.onScan.next())
+        // this.isScannerEnabled = false;
+        // this.presentToastWithOptions();
     }
 
 
@@ -42,10 +49,15 @@ export class StartTripPage implements OnInit {
 
     }
 
-    onSuccessfulScanned($event: string) {
+    async onSuccessfulScanned(address: string) {
+       this.web3Service.contract.methods.checkIn(
+            address,
+        ).send({
+            from: this.web3Service.accountAddress,
+            gas: 3000000,
+        }, () => this.onScan.next());
     }
 
-    onFailedScan($event: Error) {
 
-    }
+    onFailedScan($event: Error) {}
 }
