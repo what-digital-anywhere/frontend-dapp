@@ -27,22 +27,20 @@
             <div *ngFor="let trip of journey?.pastTrips">
                 <app-past-trip [tripData]="trip"></app-past-trip>
             </div>
-            {{!journey?.paymentData?.isPaid}} {{journey?.paymentData?.price}}
-            {{!journey?.paymentData?.isPaid && journey?.paymentData?.price > 0}}
             <ion-button *ngIf="!journey?.paymentData?.isPaid && journey?.paymentData?.price > 0"
-                        size="block" color="light">
+                        size="block" (click)="pay(journey)" color="light">
                 <ion-text color="danger">
                     Pay now
                 </ion-text>
             </ion-button>
 
 
-<!--            <ion-button *ngIf="journey?.paymentData.isPaid && journey?.paymentData.price > 0" [disabled]="true" size="block"-->
-<!--                        color="light">-->
-<!--                <ion-text color="success">-->
-<!--                    Paid-->
-<!--                </ion-text>-->
-<!--            </ion-button>-->
+            <!--            <ion-button *ngIf="journey?.paymentData.isPaid && journey?.paymentData.price > 0" [disabled]="true" size="block"-->
+            <!--                        color="light">-->
+            <!--                <ion-text color="success">-->
+            <!--                    Paid-->
+            <!--                </ion-text>-->
+            <!--            </ion-button>-->
         </ion-card-content>
     </ion-card>
 </ion-content>

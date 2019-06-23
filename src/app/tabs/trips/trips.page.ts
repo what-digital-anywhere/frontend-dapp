@@ -59,26 +59,24 @@ export class TripsPage {
                     currentTrip: null,
                     paymentData: {
                         isPaid: true,
-                        price: 0,
+                        price: 1,
                     }
                 };
             }
-            journeys[trip.journeyId].paymentData.price = trip.price;
-            journeys[trip.journeyId].paymentData.isPaid = trip.isPaid;
 
             if (!trip.isCheckedOut) {
                 this.currentTripService.tripBeh.next(trip);
                 journeys[trip.journeyId].currentTrip = trip;
                 return;
             }
-
-            if (trip.isPaid && !journeys[trip.journeyId].paymentData.isPaid) { // check whether at least one is not paid
-            console.log(trip.isPaid);
+            // consol
+            if (!trip.isPaid) { // check whether at least one is not paid
+                console.log(trip.isPaid);
                 journeys[trip.journeyId].paymentData.isPaid = trip.isPaid;
             }
 
-            if (trip.price <= 0 && journeys[trip.journeyId].paymentData.price > 0) { // check whether at least one has wrong price
-                console.log(trip.price)
+            if (trip.price <= 0) { // check whether at least one has wrong price
+                console.log(trip.price);
                 journeys[trip.journeyId].paymentData.price = trip.price;
             }
 
@@ -86,10 +84,12 @@ export class TripsPage {
         });
         const arrJourneys = Object.values(journeys);
 
-        this.journeys = arrJourneys.map(journey => ({
+        this.journeys = arrJourneys.map((journey: any) => ({
             pastTrips: journey.pastTrips.reverse(),
             currentTrip: journey.currentTrip,
-            paymentData: journey.paymentData
+            paymentData: journey.paymentData // payment data are meant to be summed payment information about the journey
+            // such as whether entire journey is already paid and whether any of the prices is equal to zero or below
+            // this requires looping from the trips, it is done during creation of a journey in this component
         })).reverse();
     }
 
@@ -126,11 +126,15 @@ export class TripsPage {
         });
     }
 
-    async pay({pastTrips}: Array<any>) {
+    async pay({pastTrips}) {
         const from = this.web3Service.accountAddress;
         const nonce = await this.web3Service.web3.eth.getTransactionCount(from, 'pending');
-        pastTrips.forEach((pastTrip, idx) => this.startPayment(pastTrip, nonce + idx));
-        batch.execute();
-        console.log(pastTrips);
+        let idxForNoncePatching = -1;
+        pastTrips.forEach((pastTrip, idx) => {
+            if (!pastTrip.isPaid && pastTrip.price > 0) {
+                idxForNoncePatching++;
+            }
+            this.startPayment(pastTrip, nonce + idxForNoncePatching)
+        });
     }
 }
