@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 import {TabsControllerService} from '../../services/tabs-controller/tabs-controller.service';
 import {Web3Service} from '../../services/web3/web3.service';
 import {TripService} from '../../services/trip-verification/trip-verification.service';
+import {JourneyService} from '../../services/journey/journey.service';
 
 @Component({
     selector: 'app-start-trip',
@@ -16,12 +17,13 @@ export class StartTripPage implements OnInit {
 
     public transporterPubKey = '';
     public onScan = new Subject();
-    public isCheckedInButtonPressed: boolean = false;
+    public isCheckedInButtonPressed = false;
 
     constructor(
         private tabsController: TabsControllerService,
         private web3Service: Web3Service,
         private router: Router,
+        private journeyService: JourneyService,
         private tripService: TripService,
         private toastController: ToastController,
     ) {
@@ -58,12 +60,13 @@ export class StartTripPage implements OnInit {
     }
 
     async checkIn(address?: string) {
+
         this.isCheckedInButtonPressed = true;
-        
         this.transporterPubKey = address || this.transporterPubKey;
+        console.log( this.journeyService.isJourneyStarted.getValue())
         console.log('check in');
         this.web3Service.contract.methods
-            .checkIn(this.transporterPubKey)
+            .checkIn(this.transporterPubKey, this.journeyService.isJourneyStarted.getValue())
             .send({from: this.web3Service.accountAddress, gas: 3000000})
             .on('error', async (error) => {
                 const toast = await this.toastController.create({

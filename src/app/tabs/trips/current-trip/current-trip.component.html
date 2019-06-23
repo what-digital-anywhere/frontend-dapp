@@ -8,8 +8,8 @@
                     ></ngx-kjua>
                 </ion-col>
                 <ion-col sizeXs="12">
-                    <p>{{tripData.start}}</p>
-                    <p>{{tripData.transporter}}</p>
+                    <p>{{tripData?.start}}</p>
+                    <p>{{tripData?.transporter}}</p>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -17,6 +17,15 @@
                     <ion-button size="block" color="light" (click)="checkOut()">
                         <ion-text color="primary">
                             Check Out
+                        </ion-text>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col sizeXs="12">
+                    <ion-button size="block" color="warning" (click)="endJourney()">
+                        <ion-text color="primary">
+                            Check out & end journey
                         </ion-text>
                     </ion-button>
                 </ion-col>
